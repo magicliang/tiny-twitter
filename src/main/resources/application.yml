@@ -52,6 +52,16 @@ app:
     secret: mySecretKey
     expiration: 86400000 # 24 hours in milliseconds
 
+# SpringDoc OpenAPI 配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+  show-actuator: true
+
 ---
 spring:
   profiles: test
