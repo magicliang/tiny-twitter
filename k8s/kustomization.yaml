@@ -1,0 +1,42 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: twitter-clone
+  namespace: twitter-clone
+
+resources:
+- namespace.yaml
+- configmap.yaml
+- secret.yaml
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- hpa.yaml
+
+commonLabels:
+  app: twitter-clone
+  project: twitter-clone
+
+images:
+- name: twitter-clone
+  newTag: latest
+
+replicas:
+- name: twitter-clone-app
+  count: 3
+
+patchesStrategicMerge:
+- |-
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: twitter-clone-app
+    namespace: twitter-clone
+  spec:
+    template:
+      metadata:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "8080"
+          prometheus.io/path: "/api/actuator/prometheus"

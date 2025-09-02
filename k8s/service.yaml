@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: twitter-clone-service
+  namespace: twitter-clone
+  labels:
+    app: twitter-clone
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: twitter-clone
+    version: v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: twitter-clone-nodeport
+  namespace: twitter-clone
+  labels:
+    app: twitter-clone
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30080
+    protocol: TCP
+    name: http
+  selector:
+    app: twitter-clone
+    version: v1

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: twitter-clone
+  labels:
+    name: twitter-clone
+    app: twitter-clone
