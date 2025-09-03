@@ -2,6 +2,12 @@ spring:
   application:
     name: twitter-clone
   
+  # 排除Springfox自动配置以避免与SpringDoc冲突
+  autoconfigure:
+    exclude:
+      - springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper
+      - springfox.boot.starter.autoconfigure.SwaggerUiWebMvcConfigurer
+  
   datasource:
     url: jdbc:h2:mem:twitterdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
